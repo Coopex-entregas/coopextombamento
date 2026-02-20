@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "tombamento": "COOP-000001",
+      "descricao": "EXEMPLO: NOTEBOOK DELL",
+      "local": "ALMOXARIFADO - PRATELEIRA 1",
+      "obs": "Exemplo de observação (pode apagar).",
+      "foto": "fotos/COOP-000001.jpg"
+    }
+  ]
+}

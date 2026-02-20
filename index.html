@@ -1,378 +1,143 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>COOPEX • Tombamento</title>
   <style>
-    :root{
-      --bg1:#07112a;
-      --bg2:#0b2a66;
-      --card: rgba(255,255,255,.10);
-      --card2: rgba(255,255,255,.08);
-      --stroke: rgba(255,255,255,.18);
-      --text:#eef3ff;
-      --muted: rgba(238,243,255,.72);
-      --accent:#2b7cff;
-      --accent2:#20c997;
-      --shadow: 0 18px 45px rgba(0,0,0,.45);
-      --radius: 22px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      min-height:100vh;
-      background:
-        radial-gradient(1200px 700px at 12% 12%, rgba(43,124,255,.35), transparent 60%),
-        radial-gradient(1000px 700px at 85% 25%, rgba(32,201,151,.18), transparent 60%),
-        radial-gradient(900px 600px at 40% 90%, rgba(43,124,255,.22), transparent 60%),
-        linear-gradient(160deg, var(--bg1), var(--bg2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-    }
-    .wrap{width:min(980px,100%);}
-    .top{
-      display:flex; gap:14px; align-items:center; justify-content:space-between;
-      margin-bottom:16px;
-    }
-    .brand{
-      display:flex; gap:12px; align-items:center;
-    }
-    .logo{
-      width:48px;height:48px;border-radius:14px;
-      background: linear-gradient(135deg, rgba(43,124,255,.9), rgba(32,201,151,.55));
-      box-shadow: 0 12px 25px rgba(0,0,0,.35);
-      display:flex;align-items:center;justify-content:center;
-      border:1px solid rgba(255,255,255,.25);
-      overflow:hidden;
-    }
-    .logo span{font-weight:900; letter-spacing:.5px}
-    .brand h1{font-size:18px;margin:0;line-height:1.1}
-    .brand p{margin:2px 0 0 0; font-size:12px;color:var(--muted)}
-    .pill{
-      padding:10px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.16);
-      backdrop-filter: blur(10px);
-      color:var(--muted);
-      font-size:12px;
-      display:flex; gap:10px; align-items:center;
-    }
-    .pill b{color:var(--text)}
-    .card{
-      background: linear-gradient(180deg, var(--card), var(--card2));
-      border:1px solid var(--stroke);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-      overflow:hidden;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:0;
-    }
-    @media (max-width: 820px){
-      .grid{grid-template-columns:1fr}
-    }
-    .left{padding:18px}
-    .right{padding:18px; border-left:1px solid rgba(255,255,255,.12)}
-    @media (max-width: 820px){
-      .right{border-left:none; border-top:1px solid rgba(255,255,255,.12)}
-    }
-    .title{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      margin-bottom:14px;
-    }
-    .code{
-      font-size:14px; color:var(--muted);
-    }
-    .code .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.14);
-      backdrop-filter: blur(10px);
-      font-weight:600;
-      color: var(--text);
-    }
-    .big{
-      font-size:22px; margin:0 0 4px 0;
-      letter-spacing:.2px;
-    }
-    .desc{
-      margin:0;
-      color:var(--muted);
-      line-height:1.55;
-      font-size:14px;
-      white-space:pre-wrap;
-    }
-    .kv{
-      display:grid;
-      grid-template-columns: 140px 1fr;
-      gap:8px 10px;
-      margin-top:14px;
-    }
-    .k{color:rgba(238,243,255,.70); font-size:12px}
-    .v{color:var(--text); font-size:13px; font-weight:600}
-    .photo{
-      width:100%;
-      aspect-ratio: 4 / 3;
-      border-radius: 18px;
-      background: rgba(0,0,0,.22);
-      border:1px solid rgba(255,255,255,.14);
-      overflow:hidden;
-      display:flex; align-items:center; justify-content:center;
-      margin-bottom:12px;
-      position:relative;
-    }
-    .photo img{
-      width:100%; height:100%;
-      object-fit: cover;
-      display:none;
-    }
-    .photo .ph{
-      color:rgba(238,243,255,.70);
-      font-size:13px;
-      padding:14px;
-      text-align:center;
-      line-height:1.35;
-    }
-    .btns{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:10px;
-    }
-    .btn{
-      appearance:none;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.10);
-      color: var(--text);
-      padding:10px 12px;
-      border-radius: 14px;
-      cursor:pointer;
-      font-weight:700;
-      font-size:13px;
-      text-decoration:none;
-      display:inline-flex; align-items:center; gap:10px;
-      transition: transform .08s ease;
-      user-select:none;
-    }
-    .btn:hover{transform: translateY(-1px)}
-    .btn.primary{
-      background: linear-gradient(135deg, rgba(43,124,255,.95), rgba(32,201,151,.60));
-      border-color: rgba(255,255,255,.22);
-    }
-    .small{
-      margin-top:12px;
-      color:rgba(238,243,255,.62);
-      font-size:12px;
-      line-height:1.45;
-    }
-    .err{
-      padding:18px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,60,60,.10);
-    }
-    .hint{
-      margin-top:10px;
-      padding:14px;
-      border-radius:18px;
-      border:1px dashed rgba(255,255,255,.18);
-      background: rgba(0,0,0,.14);
-      color: rgba(238,243,255,.75);
-      font-size:12px;
-      line-height:1.45;
-    }
-    .footer{
-      margin-top:14px;
-      color:rgba(238,243,255,.55);
-      font-size:12px;
-      text-align:center;
-    }
-    code{
-      background: rgba(0,0,0,.22);
-      border:1px solid rgba(255,255,255,.14);
-      padding:2px 6px;
-      border-radius: 10px;
-      color: var(--text);
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 12px;
-      word-break: break-all;
-    }
+    :root{color-scheme:light dark;}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#0b1220;color:#e6eefc;}
+    header{padding:18px 16px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);backdrop-filter: blur(10px);}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:40px;height:40px;border-radius:10px;object-fit:cover;background:#0b1220}
+    .brand h1{font-size:16px;margin:0;font-weight:700;letter-spacing:.2px}
+    .brand p{margin:2px 0 0;font-size:12px;opacity:.85}
+    main{max-width:980px;margin:0 auto;padding:16px}
+    .card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .content{padding:16px}
+    .row{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:760px){.row{grid-template-columns: 1.1fr .9fr;}}
+    .photo{width:100%;aspect-ratio:4/3;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center}
+    .photo img{width:100%;height:100%;object-fit:cover}
+    .k{font-size:12px;opacity:.8;margin:0}
+    .v{font-size:16px;margin:0;font-weight:650;word-break:break-word}
+    .pill{display:inline-flex;gap:8px;align-items:center;padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04);font-size:12px}
+    .muted{opacity:.8}
+    .error{padding:16px;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(255,80,80,.10)}
+    a{color:#9ed0ff}
+    footer{padding:14px 16px;opacity:.75;font-size:12px;text-align:center}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"><span>CX</span></div>
-        <div>
-          <h1>COOPEX • Tombamento</h1>
-          <p>Consulta por QR (GitHub Pages)</p>
-        </div>
-      </div>
-      <div class="pill"><span>STATUS:</span> <b id="status">CARREGANDO…</b></div>
+<header>
+  <div class="brand">
+    <img src="logo.png" alt="COOPEX" onerror="this.style.display='none'">
+    <div>
+      <h1>COOPEX • Tombamento</h1>
+      <p>Escaneou o QR? Ele abre este site e mostra foto e local do item.</p>
     </div>
+  </div>
+</header>
 
-    <div class="card">
-      <div class="grid">
-        <div class="left">
-          <div class="title">
-            <div>
-              <h2 class="big" id="titulo">Aponte o QR para este site</h2>
-              <p class="desc" id="sub">Use um link no formato <code>#COOP-000001</code>.</p>
-            </div>
-            <div class="code">
-              <div class="tag" id="tag">—</div>
-            </div>
-          </div>
-
-          <p class="desc" id="descricao"></p>
-
-          <div class="kv" id="kv" style="display:none">
-            <div class="k">LOCAL</div>
-            <div class="v" id="local"></div>
-
-            <div class="k">OBSERVAÇÃO</div>
-            <div class="v" id="obs"></div>
-          </div>
-
-          <div class="hint" id="hint">
-            Se você escaneou e caiu aqui sem mostrar item, é porque o QR não tem código.
-            Exemplo de QR: <code id="exemplo"></code>
-          </div>
-        </div>
-
-        <div class="right">
-          <div class="photo">
-            <img id="img" alt="Foto do item" />
-            <div class="ph" id="ph">SEM FOTO CADASTRADA<br><span style="opacity:.75">Envie uma imagem para a pasta <code>fotos/</code> e atualize o <code>items.json</code>.</span></div>
-          </div>
-
-          <div class="btns">
-            <a class="btn primary" id="btnCopiar" href="#">Copiar link</a>
-            <a class="btn" id="btnInicio" href="./">Início</a>
-          </div>
-
-          <div class="small">
-            <div><b>Como funciona:</b> o QR aponta para este site com o código no final (hash).</div>
-            <div style="margin-top:6px"><b>Exemplo:</b> <code id="ex2"></code></div>
-          </div>
-        </div>
+<main>
+  <div id="app" class="card">
+    <div class="content">
+      <div class="pill">
+        <strong>Tombamento:</strong>
+        <span id="tcode" class="muted">—</span>
       </div>
+      <div style="height:12px"></div>
+      <div id="state" class="muted">Carregando…</div>
     </div>
-
-    <div class="footer">COOPEX • Tombamento • Página estática (sem servidor)</div>
   </div>
 
+  <footer>
+    COOPEX Entregas • Patrimônio • <span id="year"></span>
+  </footer>
+</main>
+
 <script>
-const BASE = location.origin + location.pathname.replace(/\/[^\/]*$/, '/');
-const ITEMS_URL = BASE + 'items.json';
+const $ = (s)=>document.querySelector(s);
+$("#year").textContent = new Date().getFullYear();
 
-function byId(id){ return document.getElementById(id); }
-function setStatus(t){ byId('status').textContent = t; }
-function normCode(raw){
-  if(!raw) return '';
-  let c = raw.trim();
-  c = c.replace(/^#/, '');
-  return c;
+function getHashCode(){
+  const h = (location.hash || "").replace(/^#/, "").trim();
+  return h || null;
 }
 
-function showItem(item, code){
-  byId('status').textContent = 'OK';
-  byId('tag').textContent = code;
-  byId('titulo').textContent = 'Patrimônio COOPEX';
-  byId('sub').textContent = 'Consulta por tombamento';
-  byId('descricao').textContent = (item.descricao || '').trim() ? item.descricao : '(sem descrição)';
-  byId('kv').style.display = 'grid';
-  byId('local').textContent = item.local || '(sem local)';
-  byId('obs').textContent = item.obs || '(sem observação)';
-  byId('hint').style.display = 'none';
-
-  const img = byId('img');
-  const ph = byId('ph');
-  if(item.foto && String(item.foto).trim()){
-    img.src = item.foto;
-    img.style.display = 'block';
-    ph.style.display = 'none';
-  }else{
-    img.style.display = 'none';
-    ph.style.display = 'block';
-  }
-
-  const full = location.href;
-  byId('btnCopiar').onclick = async (e) => {
-    e.preventDefault();
-    try{
-      await navigator.clipboard.writeText(full);
-      byId('btnCopiar').textContent = 'Copiado!';
-      setTimeout(()=>byId('btnCopiar').textContent='Copiar link', 1200);
-    }catch(err){
-      alert('Não consegui copiar. Copie manualmente: ' + full);
-    }
-  };
+async function loadItems(){
+  const res = await fetch("items.json", {cache:"no-store"});
+  if(!res.ok) throw new Error("Não consegui abrir items.json (verifique se ele está na raiz do repositório).");
+  const data = await res.json();
+  if(!data || !Array.isArray(data.items)) throw new Error("Formato inválido do items.json. Precisa ter { items: [ ... ] }.");
+  return data.items;
 }
 
-function showNotFound(code){
-  setStatus('NÃO ENCONTRADO');
-  byId('tag').textContent = code;
-  byId('titulo').textContent = 'Item não encontrado';
-  byId('sub').innerHTML = 'Verifique se o código existe no <code>items.json</code>.';
-  byId('descricao').innerHTML = '';
-  byId('kv').style.display = 'none';
-  byId('hint').style.display = 'block';
+function renderNotFound(code){
+  $("#tcode").textContent = code || "—";
+  $("#state").innerHTML = `
+    <div class="error">
+      <div style="font-weight:700;margin-bottom:6px">Item não encontrado</div>
+      <div class="muted">Verifique se o tombamento existe no <code>items.json</code> e se você publicou no GitHub Pages.</div>
+    </div>`;
 }
 
-function showNoCode(){
-  setStatus('AGUARDANDO QR');
-  byId('tag').textContent = 'SEM CÓDIGO';
-  byId('titulo').textContent = 'Escaneie um QR de tombamento';
-  byId('sub').textContent = 'O QR precisa ter o código no final do link (#...).';
-  byId('descricao').textContent = '';
-  byId('kv').style.display = 'none';
-  byId('hint').style.display = 'block';
+function renderItem(item){
+  $("#tcode").textContent = item.tombamento || "—";
+  const foto = item.foto || "";
+  const desc = item.descricao || "";
+  const local = item.local || "";
+  const obs = item.obs || "";
+
+  $("#state").innerHTML = `
+    <div class="row">
+      <div class="photo">
+        ${foto ? `<img src="${foto}" alt="Foto do item" onerror="this.closest('.photo').innerHTML='<div class=muted>Foto não encontrada: ${foto}</div>'">`
+               : `<div class="muted">Sem foto</div>`}
+      </div>
+      <div>
+        <p class="k">DESCRIÇÃO</p>
+        <p class="v">${escapeHtml(desc) || "—"}</p>
+        <div style="height:10px"></div>
+        <p class="k">LOCAL</p>
+        <p class="v">${escapeHtml(local) || "—"}</p>
+        ${obs ? `<div style="height:10px"></div><p class="k">OBSERVAÇÃO</p><p class="v">${escapeHtml(obs)}</p>` : ``}
+        <div style="height:12px"></div>
+        <div class="pill">Dica: abra com <strong>#COOP-000001</strong> no final do link.</div>
+      </div>
+    </div>
+  `;
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;").replaceAll("<","&lt;")
+    .replaceAll(">","&gt;").replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 
 async function main(){
-  const example = BASE + '#COOP-000001';
-  byId('exemplo').textContent = example;
-  byId('ex2').textContent = example;
-
-  const code = normCode(location.hash);
+  const code = getHashCode();
   if(!code){
-    showNoCode();
+    $("#state").innerHTML = `
+      <div class="muted">
+        Cole/abra um link com o tombamento no final, por exemplo:<br>
+        <a href="#COOP-000001">#COOP-000001</a>
+      </div>`;
     return;
   }
-
-  setStatus('CARREGANDO ITENS…');
-  let data;
   try{
-    const r = await fetch(ITEMS_URL + '?v=' + Date.now());
-    data = await r.json();
+    const items = await loadItems();
+    const found = items.find(x => (x.tombamento || "").toUpperCase() === code.toUpperCase());
+    if(!found) return renderNotFound(code);
+    renderItem(found);
   }catch(e){
-    setStatus('ERRO');
-    byId('titulo').textContent = 'Erro ao carregar items.json';
-    byId('descricao').innerHTML = '<div class="err">Verifique se <code>items.json</code> está na raiz do site e foi enviado ao GitHub.</div>';
-    return;
+    $("#tcode").textContent = code;
+    $("#state").innerHTML = `<div class="error"><strong>Erro:</strong> ${escapeHtml(e.message || String(e))}</div>`;
   }
-
-  const items = Array.isArray(data.items) ? data.items : [];
-  const item = items.find(x => String(x.tombamento).toUpperCase() === code.toUpperCase());
-  if(!item){
-    showNotFound(code);
-    return;
-  }
-  showItem(item, code);
 }
 
-window.addEventListener('hashchange', main);
+window.addEventListener("hashchange", main);
 main();
 </script>
 </body>
